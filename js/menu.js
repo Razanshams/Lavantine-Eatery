@@ -1,3 +1,4 @@
+/*menu.js*/
 document.addEventListener('DOMContentLoaded', () => {
 const filterBtns = document.querySelectorAll('.filter-btn');
 const menuItems = document.querySelectorAll('.menu-item');

@@ -1,3 +1,4 @@
+/*index.php*/
 <?php
 require_once 'includes/db.php';
 
@@ -21,8 +22,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="index.php">Home</a></li>
             <li><a href="menu.php">Menu</a></li>
             <li><a href="order.php">Order</a></li>
-            <li><a href="Verification.php">Admin</a></li>
-        </ul>
+            <li><a href="admin/admin_login.php">Admin</a></li>          </ul>
     </nav>
 </header>
 <body>
