@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
                 <li><a href="index.php">Home</a></li>
                 <li><a href="menu.php">Menu</a></li>
                 <li><a href="order.php">Order</a></li>
-                <li><a href="Verification.php">Admin</a></li>
+                <li><a href="admin/admin_login.php">Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -64,35 +64,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
                 $subtotal = $item['price'] * $quantity;
                 $total += $subtotal;
                 ?>
-                <div class="order-item">
+                <div class="order-item" data-price="<?= $item['price'] ?>">
                     <img src="images/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" class="order-image">
                     <div class="order-item-details">
                         <h3><?= $item['name'] ?></h3>
                         <p>$<?= number_format($item['price'], 2) ?></p>
                         <div class="quantity-controls">
-                            <form method="POST">
-                                <input type="hidden" name="item_id" value="<?= $itemId ?>">
-                                <input type="hidden" name="action" value="decrease">
-                                <button type="submit">-</button>
-                            </form>
-                            <span><?= $quantity ?></span>
-                            <form method="POST">
-                                <input type="hidden" name="item_id" value="<?= $itemId ?>">
-                                <input type="hidden" name="action" value="increase">
-                                <button type="submit">+</button>
-                            </form>
+                            <button class="qty-btn" data-id="<?= $itemId ?>" data-action="decrease">-</button>
+                            <span class="qty-display"><?= $quantity ?></span>
+                            <button class="qty-btn" data-id="<?= $itemId ?>" data-action="increase">+</button>
                         </div>
-                        <p>Subtotal: $<?= number_format($subtotal, 2) ?></p>
+                        <p>Subtotal: <span class="subtotal">$<?= number_format($subtotal, 2) ?></span></p>
                     </div>
                 </div>
             <?php endforeach; ?>
             <div class="order-total">
-                <h3>Total: $<?= number_format($total, 2) ?></h3>
+                <h3>Total: <span class="total-display">$<?= number_format($total, 2) ?></span></h3>
                 <a href="checkout.php" class="checkout-btn">Proceed to Checkout</a>
             </div>
         <?php else: ?>
             <p>Your cart is empty. <a href="menu.php">Browse the menu</a> to add items.</p>
         <?php endif; ?>
     </div>
+    <script src="js/cart.js"></script>
 </body>
 </html>
