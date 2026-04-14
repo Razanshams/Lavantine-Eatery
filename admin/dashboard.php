@@ -51,20 +51,7 @@ $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="header-title">
-                <img src="../images/Flag_of_Lebanon_(tree).png" alt="Lebanese Flag" class="flag">
-                <h1>Lavantine Eatery</h1>
-            </div>
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../menu.php">Menu</a></li>
-                <li><a href="../order.php">Order</a></li>
-                <li><a href="admin_login.php">Admin</a></li>
-            </ul>
-        </nav>
-    </header>
+<?php require_once '../includes/nav.php'; ?>
     <div class="dashboard-container">
         <h2>Welcome, Admin!</h2>
         <a href="logout.php" class="logout-btn">Logout</a>

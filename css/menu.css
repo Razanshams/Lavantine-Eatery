@@ -153,6 +153,16 @@ body{
     border: 2px solid var(--secondary-color);
 }
 
+.cart-count {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 0.25rem;
+}
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
