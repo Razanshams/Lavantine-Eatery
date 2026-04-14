@@ -1,4 +1,3 @@
-/*index.php*/
 <?php
 require_once 'includes/db.php';
 
@@ -34,7 +33,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="overlay">
             <h2>Welcome to Lavantine Eatery</h2>
-            <p>Featured items: Shawarma plattter, Housemade Hummus, and Fresh Tabbouli</p>
+            <p>Featured items: Shawarma Platter, Housemade Hummus, and Fresh Tabbouli</p>
             <a href="menu.php" class="order-btn">Order Now</a>
         </div>  
     </div>

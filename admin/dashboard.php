@@ -67,6 +67,7 @@ $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll
     </header>
     <div class="dashboard-container">
         <h2>Welcome, Admin!</h2>
+        <a href="logout.php" class="logout-btn">Logout</a>
 
         <?php if ($success): ?>
             <p class="success"><?= $success ?></p>
