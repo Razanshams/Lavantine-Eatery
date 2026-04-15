@@ -1,0 +1,201 @@
+:root {
+    --primary-color: white;
+    --secondary-color: #00c828;
+    --background-color: #c0392b;
+    --font-family: 'Papyrus', cursive;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+}
+
+nav h1 {
+    color: var(--primary-color);
+    font-family: var(--font-family);
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 1rem;
+}
+
+.header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.flag {
+    min-width: 1rem;
+    min-height: 1rem;
+    max-width: 5rem;
+}
+
+nav ul {
+    font-family: var(--font-family);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    color: var(--secondary-color);
+    margin: 0;
+    margin-right: 1rem;
+}
+
+nav a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+.checkout-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.checkout-container h2 {
+    color: var(--background-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.checkout-summary {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--background-color);
+}
+
+.checkout-summary h3 {
+    color: var(--background-color);
+    margin-bottom: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: var(--background-color);
+}
+
+.checkout-form {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--background-color);
+}
+
+.checkout-form h3 {
+    color: var(--background-color);
+    margin-bottom: 1rem;
+}
+
+.checkout-form label {
+    display: block;
+    color: var(--background-color);
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.checkout-form input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid var(--background-color);
+    border-radius: 5px;
+    font-family: var(--font-family);
+}
+
+.checkout-form button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.checkout-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.success h2 {
+    color: #155724;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.continue-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: var(--font-family);
+}
+
+.continue-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-family: var(--font-family);
+}
+
+.cart-count {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 0.25rem;
+}
