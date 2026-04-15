@@ -40,6 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $stmt->execute([$name, $description, $price, $category, $image]);
         $success = 'Item added successfully!';
     }
+    if ($action === 'edit_item') {
+        $id = $_POST['item_id'];
+        $name = trim($_POST['name']);
+        $description = trim($_POST['description']);
+        $price = $_POST['price'];
+        $category = $_POST['category'];
+        $image = trim($_POST['image']);
+
+        $stmt = $pdo->prepare("UPDATE menu_items SET name=?, description=?, price=?, category=?, image=? WHERE id=?");
+        $stmt->execute([$name, $description, $price, $category, $image, $id]);
+        $success = 'Item updated successfully!';
+    }
 }
 $menuItems = $pdo->query("SELECT * FROM menu_items")->fetchAll(PDO::FETCH_ASSOC);
 $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
@@ -63,6 +75,7 @@ $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll
         <?php if ($error): ?>
             <p class="error"><?= $error ?></p>
         <?php endif; ?>
+
         <div class="admin-section">
             <h3>Add New Menu Item</h3>
             <form method="POST" action="">
@@ -91,73 +104,119 @@ $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll
                 <button type="submit">Add Item</button>
             </form>
         </div>
+
+        <div class="admin-section" id="edit-form" style="display:none;">
+            <h3>Edit Menu Item</h3>
+            <form method="POST" action="">
+                <input type="hidden" name="action" value="edit_item">
+                <input type="hidden" name="item_id" id="edit-id">
+
+                <label>Name</label>
+                <input type="text" name="name" id="edit-name" required>
+
+                <label>Description</label>
+                <input type="text" name="description" id="edit-description" required>
+
+                <label>Price</label>
+                <input type="number" step="0.01" name="price" id="edit-price" required>
+
+                <label>Category</label>
+                <select name="category" id="edit-category">
+                    <option value="Appetizers">Appetizers</option>
+                    <option value="Entrees">Entrees</option>
+                    <option value="Desserts">Desserts</option>
+                    <option value="Drinks">Drinks</option>
+                </select>
+
+                <label>Image filename</label>
+                <input type="text" name="image" id="edit-image">
+
+                <button type="submit">Save Changes</button>
+                <button type="button" onclick="document.getElementById('edit-form').style.display='none'">Cancel</button>
+            </form>
+        </div>
+
         <div class="admin-section">
             <h3>Menu Items</h3>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Available</th>
-                    <th>Actions</th>
-                </tr>
-                <?php foreach ($menuItems as $item): ?>
-                <tr>
-                    <td><?= $item['name'] ?></td>
-                    <td><?= $item['category'] ?></td>
-                    <td>$<?= $item['price'] ?></td>
-                    <td><?= $item['available'] ? 'Yes' : 'No' ?></td>
-                    <td>
-                        <form method="POST" style="display:inline">
-                            <input type="hidden" name="action" value="toggle_item">
-                            <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                            <button type="submit">Toggle</button>
-                        </form>
-                        <form method="POST" style="display:inline">
-                            <input type="hidden" name="action" value="delete_item">
-                            <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Available</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php foreach ($menuItems as $item): ?>
+                    <tr>
+                        <td><?= $item['name'] ?></td>
+                        <td><?= $item['category'] ?></td>
+                        <td>$<?= $item['price'] ?></td>
+                        <td><?= $item['available'] ? 'Yes' : 'No' ?></td>
+                        <td>
+                            <form method="POST" style="display:inline">
+                                <input type="hidden" name="action" value="toggle_item">
+                                <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                                <button type="submit">Toggle</button>
+                            </form>
+                            <form method="POST" style="display:inline">
+                                <input type="hidden" name="action" value="delete_item">
+                                <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                                <button type="submit">Delete</button>
+                            </form>
+                            <button class="edit-btn" 
+                                data-id="<?= $item['id'] ?>"
+                                data-name="<?= htmlspecialchars($item['name']) ?>"
+                                data-description="<?= htmlspecialchars($item['description']) ?>"
+                                data-price="<?= $item['price'] ?>"
+                                data-category="<?= $item['category'] ?>"
+                                data-image="<?= $item['image'] ?>">Edit</button>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
         </div>
+
         <div class="admin-section">
             <h3>Orders</h3>
-            <table>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Customer Name</th>
-                    <th>Customer Email</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-                <?php foreach ($orders as $order): ?>
-                <tr>
-                    <td><?= $order['id'] ?></td>
-                    <td><?= $order['customer_name'] ?></td>
-                    <td><?= $order['customer_email'] ?></td>
-                    <td><?= $order['status'] ?></td>
-                    <td><?= $order['created_at'] ?></td>
-                    <td>
-                        <form method="POST" style="display:inline">
-                            <input type="hidden" name="action" value="update_status">
-                            <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                            <select name="status">
-                                <option value="pending">Pending</option>
-                                <option value="preparing">Preparing</option>
-                                <option value="ready">Ready</option>
-                                <option value="completed">Completed</option>
-                            </select>
-                            <button type="submit">Update</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Customer Email</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php foreach ($orders as $order): ?>
+                    <tr>
+                        <td><?= $order['id'] ?></td>
+                        <td><?= $order['customer_name'] ?></td>
+                        <td><?= $order['customer_email'] ?></td>
+                        <td><?= $order['status'] ?></td>
+                        <td><?= $order['created_at'] ?></td>
+                        <td>
+                            <form method="POST" style="display:inline">
+                                <input type="hidden" name="action" value="update_status">
+                                <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                <select name="status">
+                                    <option value="pending">Pending</option>
+                                    <option value="preparing">Preparing</option>
+                                    <option value="ready">Ready</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
         </div>
+
     </div>
+    <script src="../js/admin.js"></script>
 </body>
 </html>

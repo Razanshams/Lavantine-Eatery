@@ -189,6 +189,11 @@ table {
     font-family: var(--font-family);
 }
 
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
 th {
     background-color: var(--background-color);
     color: var(--primary-color);
@@ -249,4 +254,19 @@ tr:hover {
     font-size: 0.8rem;
     font-weight: bold;
     margin-left: 0.25rem;
+}
+
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 0 1rem;
+    }
+
+    .admin-section {
+        padding: 1rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
 }
