@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 10, 2026 at 01:51 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Apr 16, 2026 at 02:36 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `restaurant_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password_hash` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `username`, `password_hash`) VALUES
+(1, 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
 -- --------------------------------------------------------
 
@@ -49,7 +68,9 @@ INSERT INTO `menu_items` (`id`, `name`, `description`, `price`, `category`, `ava
 (5, 'Hummus', 'Chicapea based dip', 6.99, 'Appetizers', 1, 50, 10, 'Hummus.webp'),
 (6, 'Tabbouli', 'Fresh parsley salad combined with other vegtables and our house made dressing', 11.99, 'Appetizers', 1, 50, 10, 'Tabbouli.jpeg'),
 (7, 'Atayef(dozen)', 'Pancake with ashta filling, topped with pistachios and syrup', 11.99, 'Desserts', 1, 50, 10, 'Atayef.webp'),
-(8, 'Pepsi', '2 liter bottle of pepsi', 3.50, 'Drinks', 1, 50, 10, 'Pepsi.webp');
+(8, 'Pepsi', '2 liter bottle of pepsi', 3.50, 'Drinks', 1, 50, 10, 'Pepsi.webp'),
+(12, 'French Fries', 'Large plate', 5.99, 'Appetizers', 1, 50, 10, 'fries.webp'),
+(14, 'Falafel', 'Golden, crispy patties made from ground chickpeas blended with fresh herbs, garlic, and warm spices. With side of Tahini Sauce: sesame paste, mixed with lemon juice and garlic.', 9.99, 'Entrees', 1, NULL, NULL, 'falafel.webp');
 
 -- --------------------------------------------------------
 
@@ -65,6 +86,14 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_name`, `customer_email`, `status`, `created_at`) VALUES
+(1, 'Zeinab Zeine', 'zzeine@umich.edu', 'ready', '2026-04-15 00:18:51'),
+(2, 'Maria', 'maria@gmail.com', 'preparing', '2026-04-15 01:55:07');
+
 -- --------------------------------------------------------
 
 --
@@ -79,8 +108,23 @@ CREATE TABLE `order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `menu_item_id`, `quantity`) VALUES
+(1, 1, 2, 2),
+(2, 2, 6, 1),
+(3, 2, 14, 1);
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `menu_items`
@@ -107,22 +151,28 @@ ALTER TABLE `order_items`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
