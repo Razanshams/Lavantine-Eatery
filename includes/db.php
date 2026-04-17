@@ -1,4 +1,6 @@
+
 <?php
+//database connection
 $host = 'localhost';
 $dbname = 'restaurant_db';
 $username = 'root';

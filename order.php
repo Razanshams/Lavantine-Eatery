@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
                         <h3><?= $item['name'] ?></h3>
                         <p>$<?= number_format($item['price'], 2) ?></p>
 
-                        <!-- Quantity controls — js handles these without reloading the page -->
+                        <!--  js handles these without reloading the page -->
                         <div class="quantity-controls">
                             <!-- data-id and data-action are read by cart.js -->
                             <button class="qty-btn" data-id="<?= $itemId ?>" data-action="decrease">-</button>

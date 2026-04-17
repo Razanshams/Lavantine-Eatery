@@ -13,6 +13,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <?php require_once 'includes/nav.php'; ?>
 <body>
+    <!-- banner slideshow and overlay -->
     <div class="banner">
         <div class="slides">
             <img src="images/Chicken_Shawarma.webp" alt="Restaurant Banner" class="slide active">
@@ -29,7 +30,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="divider1">
     </div>
 
-
+    <!-- basic divs with text for an about and contact section-->
     <div class="about">
         <h2>About Us</h2>
         <p>Just two girls from Dearborn who want to share the amazing flavors of Levant with the world. What started out as our hobbies became a passion. After everyone in our lives telling us how amazing our food is, we decided it would be a crime not to share it with the rest of the world. </p>
@@ -49,7 +50,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="divider3">
     </div>
-
+    <!-- JavaScript for banner slideshow -->
     <script src="js/index.js"></script>
 </body>
 </html>

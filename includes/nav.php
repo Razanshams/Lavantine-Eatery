@@ -15,6 +15,7 @@ $prefix = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../' : '';
 ?>
 
 <header>
+    <!-- nav bar used for all the pages -->
     <nav>
         <div class="header-title">
             <img src="<?= $prefix ?>images/Flag_of_Lebanon_(tree).png" alt="Lebanese Flag" class="flag">
@@ -25,6 +26,7 @@ $prefix = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../' : '';
             <li><a href="<?= $prefix ?>menu.php">Menu</a></li>
             <li><a href="<?= $prefix ?>order.php"> Order Cart</a></li>
                 <?php if ($cartCount > 0): ?>
+                     <!-- show number of items in cart in nav -->
                     <span class="cart-count"><?= $cartCount ?></span>
                 <?php endif; ?>
             </a></li>
